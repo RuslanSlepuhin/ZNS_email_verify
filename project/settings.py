@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 import os
 from datetime import timedelta
 from pathlib import Path
+import dj_database_url
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,7 +27,7 @@ SECRET_KEY = 'django-insecure-l-m@x57ecya&u%q&6c_db(14bac7)@c)wb9)*ml=#b6)u@fo@w
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', 'zns-token.herokuapp.com']
 
 # EMAIL
 # email account: ruslanslp19@gmail.com
@@ -91,16 +93,31 @@ WSGI_APPLICATION = 'project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'try65',
+#         'USER': 'ruslan',
+#         'PASSWORD': '12345',
+#         'HOST': '127.0.0.1',
+#         'PORT': '5432'
+#     }
+# }
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'try65',
-        'USER': 'ruslan',
-        'PASSWORD': '12345',
-        'HOST': '127.0.0.1',
+        'NAME': 'd4ltga38ge74g2',
+        'USER': 'ptrnztncyqfgls',
+        'PASSWORD': '9aa0bf9ba37ed8d8913e3d18af5a52fe7a807a01da473d0b5e3deb61eee7a580',
+        'HOST': 'ec2-52-30-159-47.eu-west-1.compute.amazonaws.com',
         'PORT': '5432'
     }
 }
+
+
+db_from_env = dj_database_url.config(conn_max_age=600)
+DATABASES['default'].update(db_from_env)
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -138,9 +155,9 @@ CSRF_COOKIE_SECURE = True
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
-# STATICFILES_DIRS = [
-#     os.path.join(BASE_DIR, 'build/static')
-# ]
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
 
 
 
